@@ -75,4 +75,15 @@ public class DBMapTest {
         assertThat(map.keySet()).containsExactly("bar", "foo", "qix");
     }
 
+    @Test
+    public void element_are_sorted_by_comparator() {
+        map = new DBMap<>(serializer, (s1, s2) -> s1.compareTo(s2) * -1);
+        map.put("foo", 12d);
+        map.put("bar", 13d);
+        map.put("qix", 14d);
+
+        assertThat(map.keySet()).containsExactly("qix", "foo", "bar");
+    }
+
+
 }

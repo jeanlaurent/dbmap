@@ -15,6 +15,11 @@ public class DBMap<K, V> implements Map<K, V> {
     private SortedMap<K, V> map;
     private DiskSerializer serializer;
 
+    public DBMap(DiskSerializer serializer, Comparator<K> keyComparator) {
+        map = new TreeMap<>(keyComparator);
+        this.serializer = serializer;
+    }
+
     public DBMap(DiskSerializer serializer) {
         map = new TreeMap<>();
         this.serializer = serializer;
