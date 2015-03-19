@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 public class DBMap<K, V> implements Map<K, V> {
-    private TreeMap<K, V> map;
+    private SortedMap<K, V> map;
     private DiskSerializer serializer;
 
     public DBMap(DiskSerializer serializer) {

@@ -6,7 +6,7 @@ import net.morlhon.dbmap.DiskSerializer;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeMap;
+import java.util.SortedMap;
 
 public class JSONDiskSerializer implements DiskSerializer {
     private final ObjectMapper objectMapper;
@@ -20,12 +20,12 @@ public class JSONDiskSerializer implements DiskSerializer {
     }
 
     @Override
-    public void save(TreeMap map, File location) throws IOException {
+    public void save(SortedMap map, File location) throws IOException {
         objectMapper.writeValue(location, map);
     }
 
     @Override
-    public TreeMap load(File location) throws IOException {
-        return objectMapper.readValue(location, TreeMap.class);
+    public SortedMap load(File location) throws IOException {
+        return objectMapper.readValue(location, SortedMap.class);
     }
 }

@@ -3,12 +3,12 @@ package net.morlhon.dbmap.serializer;
 import net.morlhon.dbmap.DiskSerializer;
 
 import java.io.*;
-import java.util.TreeMap;
+import java.util.SortedMap;
 
 public class JDKObjectDiskSerializer implements DiskSerializer {
 
     @Override
-    public void save(TreeMap map, File location) throws IOException {
+    public void save(SortedMap map, File location) throws IOException {
         ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(location));
         synchronized (map) {
             stream.writeObject(map);
@@ -17,9 +17,9 @@ public class JDKObjectDiskSerializer implements DiskSerializer {
     }
 
     @Override
-    public TreeMap load(File location) throws IOException {
+    public SortedMap load(File location) throws IOException {
         try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(location))) {
-            return (TreeMap)stream.readObject();
+            return (SortedMap)stream.readObject();
         } catch (ClassNotFoundException cnfe) {
             throw new RuntimeException(cnfe);
         }
