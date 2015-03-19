@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractDiskSerializerTest {
-    private static File location = new File("test.map");
+    protected static File location = new File("test.map");
     private DiskSerializer serializer;
 
     protected abstract DiskSerializer buildSerializer();
