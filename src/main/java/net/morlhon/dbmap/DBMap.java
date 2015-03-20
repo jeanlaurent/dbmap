@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class DBMap<K, V> implements Map<K, V> {
+public class DBMap<K, V> implements SortedMap<K, V> {
     private SortedMap<K, V> map;
     private DiskSerializer serializer;
 
@@ -29,6 +29,8 @@ public class DBMap<K, V> implements Map<K, V> {
         map = new TreeMap<>();
         serializer = new JDKObjectDiskSerializer();
     }
+
+    // io
 
     public void save(File location) throws IOException {
         serializer.save(map, location);
@@ -109,6 +111,36 @@ public class DBMap<K, V> implements Map<K, V> {
     @Override
     public void clear() {
         map.clear();
+    }
+
+    @Override
+    public Comparator<? super K> comparator() {
+        return map.comparator();
+    }
+
+    @Override
+    public SortedMap<K, V> subMap(K fromKey, K toKey) {
+        return map.subMap(fromKey, toKey);
+    }
+
+    @Override
+    public SortedMap<K, V> headMap(K toKey) {
+        return map.headMap(toKey);
+    }
+
+    @Override
+    public SortedMap<K, V> tailMap(K fromKey) {
+        return map.tailMap(fromKey);
+    }
+
+    @Override
+    public K firstKey() {
+        return map.firstKey();
+    }
+
+    @Override
+    public K lastKey() {
+        return map.lastKey();
     }
 
     @Override
